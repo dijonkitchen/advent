@@ -39,13 +39,9 @@ def is_safe(
                     return False
                 return is_safe(
                     report_without_ith_element(report, i),
-                    has_increase=None,
-                    has_decrease=has_decrease,
                     dampeners_left=dampeners_left - 1,
                 ) or is_safe(
                     report_without_ith_element(report, i + 1),
-                    has_increase=None,
-                    has_decrease=has_decrease,
                     dampeners_left=dampeners_left - 1,
                 )
 
@@ -56,13 +52,9 @@ def is_safe(
                     return False
                 return is_safe(
                     report_without_ith_element(report, i),
-                    has_increase=has_increase,
-                    has_decrease=None,
                     dampeners_left=dampeners_left - 1,
                 ) or is_safe(
                     report_without_ith_element(report, i + 1),
-                    has_increase=has_increase,
-                    has_decrease=None,
                     dampeners_left=dampeners_left - 1,
                 )
 
@@ -71,13 +63,9 @@ def is_safe(
                 return False
             return is_safe(
                 report_without_ith_element(report, i),
-                has_increase=has_increase,
-                has_decrease=has_decrease,
                 dampeners_left=dampeners_left - 1,
             ) or is_safe(
                 report_without_ith_element(report, i + 1),
-                has_increase=has_increase,
-                has_decrease=has_decrease,
                 dampeners_left=dampeners_left - 1,
             )
 
