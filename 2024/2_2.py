@@ -30,57 +30,56 @@ def is_safe(
         level_1 = report[i]
         level_2 = report[i + 1]
 
+        # pdb.set_trace()
+
         if is_increasing(level_1, level_2):
             has_increase = True
             if has_increase and has_decrease:
                 if dampeners_left == 0:
                     return False
-                if not is_safe(
+                return is_safe(
                     report_without_ith_element(report, i),
                     has_increase=None,
                     has_decrease=has_decrease,
                     dampeners_left=dampeners_left - 1,
-                ) or not is_safe(
+                ) or is_safe(
                     report_without_ith_element(report, i + 1),
                     has_increase=None,
                     has_decrease=has_decrease,
                     dampeners_left=dampeners_left - 1,
-                ):
-                    return False
+                )
 
         if is_decreasing(level_1, level_2):
             has_decrease = True
             if has_increase and has_decrease:
                 if dampeners_left == 0:
                     return False
-                if not is_safe(
+                return is_safe(
                     report_without_ith_element(report, i),
                     has_increase=has_increase,
                     has_decrease=None,
                     dampeners_left=dampeners_left - 1,
-                ) or not is_safe(
+                ) or is_safe(
                     report_without_ith_element(report, i + 1),
                     has_increase=has_increase,
                     has_decrease=None,
                     dampeners_left=dampeners_left - 1,
-                ):
-                    return False
+                )
 
         if not is_safe_change(level_1, level_2):
             if dampeners_left == 0:
                 return False
-            if not is_safe(
+            return is_safe(
                 report_without_ith_element(report, i),
                 has_increase=has_increase,
                 has_decrease=has_decrease,
                 dampeners_left=dampeners_left - 1,
-            ) or not is_safe(
+            ) or is_safe(
                 report_without_ith_element(report, i + 1),
                 has_increase=has_increase,
                 has_decrease=has_decrease,
                 dampeners_left=dampeners_left - 1,
-            ):
-                return False
+            )
 
     return True
 
@@ -101,11 +100,12 @@ for report in reports:
     report = [int(i) for i in report]
 
     if is_safe(report):
-        print(report)
+        # print(report)
         safe_reports += 1
 
 
 print(safe_reports)
+
 
 data: str = """22 25 27 28 30 31 32 29
 72 74 75 77 80 81 81
@@ -1122,5 +1122,6 @@ for report in reports:
 
 print(safe_reports)
 
-# more than 650
+# more than 665
+# not 670
 # less than 676
