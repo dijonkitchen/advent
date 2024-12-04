@@ -4,19 +4,18 @@ import re
 data = """xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))
 """
 
-pattern = r"mul\((\d+,\d+)\)"
+pattern = r"(?<!don't)mul\((\d+),(\d+)\)"
 
 
-def sum_product(data: str, pattern) -> int:
-    matches = re.findall(pattern, data)
+def sum_product(data: str, pattern: str) -> int:
+    matches = re.finditer(pattern, "do()" + data + "don't")
 
     # pdb.set_trace()
 
     total = 0
 
     for match in matches:
-        numbers = match.split(",")
-        total += int(numbers[0]) * int(numbers[1])
+        total += int(match.group(1)) * int(match.group(2))
 
     return total
 
