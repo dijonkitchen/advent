@@ -1,21 +1,30 @@
-import pdb
 import re
 
 data = """xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))
 """
 
-pattern = r"(?<!don't)mul\((\d+),(\d+)\)"
+# Pattern to match do(), don't(), and mul() expressions
+pattern = r"(do\(\)|don't\(\)|mul\((\d+),(\d+)\))"
 
 
 def sum_product(data: str, pattern: str) -> int:
-    matches = re.finditer(pattern, "do()" + data + "don't")
-
-    # pdb.set_trace()
+    # Wrap the data with do() and don't()
+    wrapped_data = "do()" + data + "don't()"
 
     total = 0
+    in_valid_section = False
 
-    for match in matches:
-        total += int(match.group(1)) * int(match.group(2))
+    for match in re.finditer(pattern, wrapped_data):
+        token = match.group(1)
+
+        if token == "do()":
+            in_valid_section = True
+        elif token == "don't()":
+            in_valid_section = False
+        elif in_valid_section:  # it's a mul() expression and we're in a valid section
+            num1, num2 = match.group(2), match.group(3)
+            # print(f"Found: mul({num1},{num2})")  # Debug print
+            total += int(num1) * int(num2)
 
     return total
 
