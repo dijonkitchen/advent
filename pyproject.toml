@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "advent"
+version = "0.1.0"
+description = ""
+authors = ["JC (Jonathan Chen) <11434205+dijonkitchen@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+numpy = "^2.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

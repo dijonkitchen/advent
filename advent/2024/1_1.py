@@ -1,5 +1,8 @@
+#!/usr/bin/env python3
+
 list_1 = [3, 4, 2, 1, 3, 3]
 list_2 = [4, 3, 5, 3, 9, 3]
+
 
 def paired_distance(list_1, list_2):
     sorted_list_1 = sorted(list_1)
@@ -11,6 +14,7 @@ def paired_distance(list_1, list_2):
         total_distance += abs(sorted_list_1[i] - sorted_list_2[i])
 
     return total_distance
+
 
 print(paired_distance(list_1, list_2))
 

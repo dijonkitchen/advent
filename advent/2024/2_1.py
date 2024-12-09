@@ -1,101 +1,68 @@
+#!/usr/bin/env python3
+
 import pdb
 
 
-def is_increasing(level_1: int, level_2: int) -> bool:
+def is_increasing(level_1, level_2):
     return level_2 > level_1
 
 
-def is_decreasing(level_1: int, level_2: int) -> bool:
+def is_decreasing(level_1, level_2):
     return level_2 < level_1
 
 
-def is_safe_change(level_1: int, level_2: int) -> bool:
+def is_safe_change(level_1, level_2):
     change = abs(level_1 - level_2)
     return 1 <= change <= 3
 
 
-def report_without_ith_element(report: list[int], i: int) -> list[int]:
-    new_report = report.copy()
-    new_report.pop(i)
-    return new_report
+def is_safe(report):
+    report = report.split(" ")
+    report = [int(i) for i in report]
 
+    has_increase = None
+    has_decrease = None
 
-def is_safe(
-    report: list[int],
-    has_increase: bool | None = None,
-    has_decrease: bool | None = None,
-    dampeners_left: int = 1,
-) -> bool:
     for i in range(len(report) - 1):
         level_1 = report[i]
         level_2 = report[i + 1]
 
-        # pdb.set_trace()
-
         if is_increasing(level_1, level_2):
             has_increase = True
             if has_increase and has_decrease:
-                if dampeners_left == 0:
-                    return False
-                return is_safe(
-                    report_without_ith_element(report, i),
-                    dampeners_left=dampeners_left - 1,
-                ) or is_safe(
-                    report_without_ith_element(report, i + 1),
-                    dampeners_left=dampeners_left - 1,
-                )
-
+                # pdb.set_trace()
+                return False
         if is_decreasing(level_1, level_2):
             has_decrease = True
             if has_increase and has_decrease:
-                if dampeners_left == 0:
-                    return False
-                return is_safe(
-                    report_without_ith_element(report, i),
-                    dampeners_left=dampeners_left - 1,
-                ) or is_safe(
-                    report_without_ith_element(report, i + 1),
-                    dampeners_left=dampeners_left - 1,
-                )
-
-        if not is_safe_change(level_1, level_2):
-            if dampeners_left == 0:
+                # pdb.set_trace()
                 return False
-            return is_safe(
-                report_without_ith_element(report, i),
-                dampeners_left=dampeners_left - 1,
-            ) or is_safe(
-                report_without_ith_element(report, i + 1),
-                dampeners_left=dampeners_left - 1,
-            )
+        if not is_safe_change(level_1, level_2):
+            # pdb.set_trace()
+            return False
 
     return True
 
 
-data: str = """7 6 4 2 1
+data = """7 6 4 2 1
 1 2 7 8 9
 9 7 6 2 1
 1 3 2 4 5
 8 6 4 4 1
 1 3 6 7 9"""
 
-reports: list[str] = data.split("\n")
+reports = data.split("\n")
 
-safe_reports: int = 0
+safe_reports = 0
 
 for report in reports:
-    report = report.split(" ")
-    report = [int(i) for i in report]
-
     if is_safe(report):
-        # print(report)
         safe_reports += 1
 
 
 print(safe_reports)
 
-
-data: str = """22 25 27 28 30 31 32 29
+data = """22 25 27 28 30 31 32 29
 72 74 75 77 80 81 81
 52 53 55 58 59 63
 14 17 19 22 27
@@ -1096,20 +1063,13 @@ data: str = """22 25 27 28 30 31 32 29
 36 35 32 31 28
 93 91 90 89 86 85 82 80"""
 
-reports: list[str] = data.split("\n")
+reports = data.split("\n")
 
-safe_reports: int = 0
+safe_reports = 0
 
 for report in reports:
-    report = report.split(" ")
-    report = [int(i) for i in report]
-
     if is_safe(report):
         safe_reports += 1
 
 
 print(safe_reports)
-
-# more than 665
-# not 670
-# less than 676

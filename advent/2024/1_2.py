@@ -1,5 +1,8 @@
+#!/usr/bin/env python3
+
 list_1 = [3, 4, 2, 1, 3, 3]
 list_2 = [4, 3, 5, 3, 9, 3]
+
 
 def similarity_score(list_1, list_2):
     # tally list_2 values
@@ -17,6 +20,7 @@ def similarity_score(list_1, list_2):
         score += i * tally.get(i, 0)
 
     return score
+
 
 print(similarity_score(list_1, list_2))
 
