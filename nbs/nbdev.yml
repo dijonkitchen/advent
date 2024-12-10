@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "advent"
+  site-url: "https://dijonkitchen.github.io/advent"
+  description: "Advent of Code"
+  repo-branch: main
+  repo-url: "https://github.com/dijonkitchen/advent"
