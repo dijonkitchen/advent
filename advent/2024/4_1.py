@@ -18,6 +18,10 @@ MAMMMXMMMM
 MXMXAXMASX
 """
 
+def get_diagonals(matrix):
+    diags = [matrix[::-1, :].diagonal(i) for i in range(-matrix.shape[0]+1, matrix.shape[1])]
+    diags.extend(matrix.diagonal(i) for i in range(matrix.shape[1]-1, -matrix.shape[0], -1))
+    return [''.join(n) for n in diags]
 
 def multi_direction_word_count(word: str, input: str) -> int:
     # Clean input and convert to matrix
@@ -38,7 +42,14 @@ def multi_direction_word_count(word: str, input: str) -> int:
         list(re.finditer(backward_pattern, vertical_text))
     )
 
-    return horizontal_matches + vertical_matches
+    # Get diagonal matches
+    diagonals = get_diagonals(matrix)
+    diagonal_text = "\n".join(diagonals)
+    diagonal_matches = len(list(re.finditer(forward_pattern, diagonal_text))) + len(
+        list(re.finditer(backward_pattern, diagonal_text))
+    )
+
+    return horizontal_matches + vertical_matches + diagonal_matches
 
 
 print(multi_direction_word_count(search_word, input))
