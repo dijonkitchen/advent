@@ -1,0 +1,12 @@
+name: adventvenv
+channels:
+  - conda-forge
+dependencies:
+  - jupyterlab
+  - nbdev
+  - numpy
+  - pip:
+    - advent==0.1.0
+    - jupyterlab-quarto==0.3.5
+
+prefix: "/opt/homebrew/Caskroom/miniforge/base/envs/adventvenv"

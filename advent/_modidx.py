@@ -12,5 +12,4 @@ d = { 'settings': { 'branch': 'main',
             'advent.2024.3_1': {},
             'advent.2024.3_2': {},
             'advent.2024.4_1': {},
-            'advent.2024.4_2': {},
             'advent.core': {'advent.core.foo': ('core.html#foo', 'advent/core.py')}}}
